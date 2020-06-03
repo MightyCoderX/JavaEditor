@@ -4,17 +4,19 @@
 <?import javafx.scene.web.WebView?>
 <?import javafx.scene.control.ToolBar?>
 
+<?import javafx.scene.control.SplitPane?>
 <VBox fx:controller="com.mightycoderx.javafx.Controller"
-      xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" spacing="10">
+      xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" spacing="0">
 
-    <ToolBar fx:id="toolbar" disable="true">
+    <ToolBar fx:id="toolbar" disable="true" style="-fx-background-color: #333">
         <Button fx:id="btnCompile" text="Compile" minWidth="100"/>
         <Button fx:id="btnRun" text="Run" minWidth="100" disable="true"/>
         <Button fx:id="btnCompileAndRun" text="Compile and run" minWidth="100"/>
     </ToolBar>
 
-    <WebView fx:id="editor" />
-
-    <TextArea fx:id="txtConsole" editable="false" />
+    <SplitPane orientation="VERTICAL">
+        <WebView fx:id="editor" style="-fx-border: none" />
+        <TextArea fx:id="txtConsole" editable="false" minHeight="0"/>
+    </SplitPane>
 
 </VBox>

@@ -1,6 +1,7 @@
 package com.mightycoderx.javafx;
 
 import com.sun.istack.internal.Nullable;
+import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,14 +62,20 @@ public class Controller implements Initializable
 
         btnCompile.setOnAction(e ->
         {
+            txtConsole.clear();
             compile(file);
             btnRun.setDisable(false);
         });
 
-        btnRun.setOnAction(e -> run(file));
+        btnRun.setOnAction(e ->
+        {
+            txtConsole.clear();
+            run(file);
+        });
 
         btnCompileAndRun.setOnAction(e ->
         {
+            txtConsole.clear();
             compile(file);
             run(file);
         });
@@ -88,43 +95,65 @@ public class Controller implements Initializable
 
     public void compile(File file)
     {
-        try
+        new Thread(() ->
         {
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file.getPath());
-            writer.write((String) editor.getEngine().executeScript("getValue()"));
-            writer.close();
-
-            Process pr = Runtime.getRuntime().exec("javac " + file.getPath());
-            int exitCode = printProcessOutput(pr);
-            if(exitCode == 0)
+            try
             {
-                println("Compiled successfully!\n");
+                file.createNewFile();
+                FileWriter writer = new FileWriter(file.getPath());
+                writer.write((String) editor.getEngine().executeScript("getValue()"));
+                writer.close();
+    
+                Process pr = Runtime.getRuntime().exec("javac " + file.getPath());
+                
+                Platform.runLater(() ->
+                {
+                    int exitCode = 0;
+                    try
+                    {
+                        exitCode = printProcessOutput(pr);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    if (exitCode == 0)
+                    {
+                        println("Compiled successfully!\n");
+                    }
+                });
             }
-        }
-        catch (IOException | InterruptedException ioException)
-        {
-            ioException.printStackTrace();
-        }
+            catch (IOException ioException)
+            {
+                ioException.printStackTrace();
+            }
+        }).run();
     }
 
     public void run(File file)
     {
-        if(!txtConsole.getText().isEmpty())
+        new Thread(() ->
         {
-            txtConsole.clear();
-        }
-
-        try
-        {
-            Process pr =  Runtime.getRuntime().exec("java " + file.getPath().replace(".java", ""));
-            int exitCode = printProcessOutput(pr);
-            println("Process ended with exit code " + exitCode);
-        }
-        catch (IOException | InterruptedException ex)
-        {
-            ex.printStackTrace();
-        }
+            try
+            {
+                Process pr = Runtime.getRuntime().exec("java " + file.getPath().replace(".java", ""));
+                Platform.runLater(() ->
+                {
+                    try
+                    {
+                        println("Process ended with exit code " + printProcessOutput(pr));
+                    }
+                    catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                });
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
+        }).run();
     }
 
     public int printProcessOutput(Process pr) throws InterruptedException
