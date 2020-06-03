@@ -14,6 +14,7 @@ import javafx.scene.web.WebView;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Controller implements Initializable
 {
@@ -52,10 +53,18 @@ public class Controller implements Initializable
         });
 
         final KeyCombination copyCombo = new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN);
-
+        final KeyCombination cutCombo = new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN);
+    
+    
         editor.addEventFilter(KeyEvent.KEY_PRESSED, e ->
         {
-            if (copyCombo.match(e)) {
+            if (copyCombo.match(e))
+            {
+                onCopy();
+            }
+    
+            if (cutCombo.match(e))
+            {
                 onCopy();
             }
         });
@@ -76,8 +85,11 @@ public class Controller implements Initializable
         btnCompileAndRun.setOnAction(e ->
         {
             txtConsole.clear();
-            compile(file);
-            run(file);
+    
+            if(compile(file))
+            {
+                run(file);
+            }
         });
     }
 
@@ -93,8 +105,9 @@ public class Controller implements Initializable
         System.out.println("Clipboard: " + clipboard.getString());
     }
 
-    public void compile(File file)
+    public boolean compile(File file)
     {
+        AtomicBoolean success = new AtomicBoolean(false);
         new Thread(() ->
         {
             try
@@ -120,6 +133,7 @@ public class Controller implements Initializable
                     if (exitCode == 0)
                     {
                         println("Compiled successfully!\n");
+                        success.set(true);
                     }
                 });
             }
@@ -128,6 +142,8 @@ public class Controller implements Initializable
                 ioException.printStackTrace();
             }
         }).run();
+        
+        return success.get();
     }
 
     public void run(File file)
@@ -161,7 +177,7 @@ public class Controller implements Initializable
         try
         {
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-            BufferedReader stdError = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
 
             String s = null;
             while ((s = stdInput.readLine()) != null)

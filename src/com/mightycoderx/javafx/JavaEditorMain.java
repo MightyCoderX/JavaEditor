@@ -19,6 +19,7 @@ public class JavaEditorMain extends Application
         Parent root = FXMLLoader.load(getClass().getResource("Scene.fxml"));
         window.setTitle("Java Editor");
         window.setScene(new Scene(root, 500, 350));
+        window.getScene().getStylesheets().add("Scene.css");
         window.show();
     }
 }

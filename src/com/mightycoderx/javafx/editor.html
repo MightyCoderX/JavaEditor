@@ -28,6 +28,14 @@
                     enableSnippets: true,
                     enableLiveAutocompletion: false
                 });
+
+                editor.commands.addCommand({
+                    name: 'copy',
+                    bindKey: {win: 'Ctrl-C', mac: 'Command-Option-C'},
+                    exec: editor => {},
+                    readOnly: true
+                });
+                editor.setShowPrintMargin(false);
                 editor.setTheme("ace/theme/monokai");
                 editor.getSession().setMode("ace/mode/java");
                 editor.setValue("");

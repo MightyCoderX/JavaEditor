@@ -15,8 +15,8 @@
     </ToolBar>
 
     <SplitPane orientation="VERTICAL">
-        <WebView fx:id="editor" style="-fx-border: none" />
-        <TextArea fx:id="txtConsole" editable="false" minHeight="0"/>
+        <WebView fx:id="editor" />
+        <TextArea fx:id="txtConsole" editable="false" minHeight="0" />
     </SplitPane>
 
 </VBox>
