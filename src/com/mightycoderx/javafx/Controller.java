@@ -6,10 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
-import netscape.javascript.JSObject;
 
 import java.io.*;
 import java.net.URL;
@@ -18,10 +17,10 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable
 {
     @FXML
-    private WebView editor;
-
+    public ToolBar toolbar;
+    
     @FXML
-    public HBox buttonBox;
+    private WebView editor;
 
     @FXML
     public Button btnCompile;
@@ -47,7 +46,7 @@ public class Controller implements Initializable
             if (newValue == Worker.State.SUCCEEDED)
             {
                 editor.getEngine().executeScript("initEditor()");
-                buttonBox.setDisable(false);
+                toolbar.setDisable(false);
             }
         });
 
@@ -56,7 +55,6 @@ public class Controller implements Initializable
         editor.addEventFilter(KeyEvent.KEY_PRESSED, e ->
         {
             if (copyCombo.match(e)) {
-                onCopy();
                 onCopy();
             }
         });

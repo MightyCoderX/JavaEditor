@@ -2,18 +2,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
-
 <?import javafx.scene.web.WebView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+
 <VBox fx:controller="com.mightycoderx.javafx.Controller"
       xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" spacing="10">
 
-    <WebView fx:id="editor" />
-    <HBox fx:id="buttonBox" alignment="BASELINE_CENTER" spacing="10" disable="true">
+    <ToolBar fx:id="toolbar" disable="true">
         <Button fx:id="btnCompile" text="Compile" minWidth="100"/>
         <Button fx:id="btnRun" text="Run" minWidth="100" disable="true"/>
         <Button fx:id="btnCompileAndRun" text="Compile and run" minWidth="100"/>
-    </HBox>
+    </ToolBar>
+
+    <WebView fx:id="editor" />
 
     <TextArea fx:id="txtConsole" editable="false" />
 
