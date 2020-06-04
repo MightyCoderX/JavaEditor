@@ -3,8 +3,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.web.WebView?>
 <?import javafx.scene.control.ToolBar?>
-
 <?import javafx.scene.control.SplitPane?>
+
 <VBox fx:controller="com.mightycoderx.javafx.Controller"
       xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" spacing="0">
 
