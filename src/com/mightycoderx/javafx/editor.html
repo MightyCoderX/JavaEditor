@@ -9,6 +9,38 @@
                 bottom: 0;
                 left: 0;
             }
+
+            table#controls
+            {
+                border-spacing: 0 !important;
+                color: black;
+            }
+
+            #controls tr td:nth-child(1)
+            {
+                text-align: left;
+            }
+
+            #controls tr td:nth-child(2) select,input[type="text"]
+            {
+                width: 100% !important;
+            }
+
+            #controls tr td:nth-child(2) input[type="number"]
+            {
+                width: 80% !important;
+                float: right;
+            }
+
+            #controls tr td
+            {
+                padding: 0;
+            }
+
+            #more-controls tr td:nth-child(2) input
+            {
+                align-self: center !important;
+            }
         </style>
     </head>
     <body>
@@ -36,7 +68,7 @@
                     readOnly: true
                 });
                 editor.setShowPrintMargin(false);
-                editor.setTheme("ace/theme/monokai");
+                editor.setTheme("ace/theme/merbivore");
                 editor.getSession().setMode("ace/mode/java");
                 editor.setValue("");
             }
