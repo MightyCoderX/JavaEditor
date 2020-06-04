@@ -58,7 +58,12 @@
                 {
                     enableBasicAutocompletion: true,
                     enableSnippets: true,
-                    enableLiveAutocompletion: true
+                    enableLiveAutocompletion: true,
+                    keyboardHandler: "ace/keyboard/vscode",
+                    tabSize: 4,
+                    mode: "ace/mode/java",
+                    theme: "ace/theme/merbivore",
+                    printMargin: false
                 });
 
                 editor.commands.addCommand({
@@ -67,9 +72,7 @@
                     exec: editor => {},
                     readOnly: true
                 });
-                editor.setShowPrintMargin(false);
-                editor.setTheme("ace/theme/merbivore");
-                editor.getSession().setMode("ace/mode/java");
+                
                 editor.setValue("");
             }
 
