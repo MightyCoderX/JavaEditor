@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 
 import java.io.*;
@@ -20,11 +21,14 @@ import java.util.concurrent.*;
 public class Controller implements Initializable
 {
     @FXML
+    public VBox layout;
+    
+    @FXML
     public ToolBar toolbar;
 
     @FXML
     public Button btnCompile;
-
+    
     @FXML
     private Button btnRun;
 
@@ -49,7 +53,7 @@ public class Controller implements Initializable
             if (newValue == Worker.State.SUCCEEDED)
             {
                 editor.getEngine().executeScript("initEditor()");
-                toolbar.setDisable(false);
+                layout.setVisible(true);
             }
         });
 
@@ -147,6 +151,7 @@ public class Controller implements Initializable
             }
             return false;
         };
+        
         Future<Boolean> future = executor.submit(callable);
         executor.shutdown();
         try

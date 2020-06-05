@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.web.*?>
 
-<VBox alignment="TOP_CENTER" spacing="0" stylesheets="@../../../Scene.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mightycoderx.javafx.Controller">
+<VBox fx:id="layout" visible="false" alignment="TOP_CENTER" spacing="0" stylesheets="@../../../Scene.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mightycoderx.javafx.Controller">
     <MenuBar prefHeight="12.0" prefWidth="802.0" style="-fx-padding: 0,0,0,0; -fx-background-color: #333;">
       <menus>
          <Menu mnemonicParsing="false" text="File">
@@ -27,7 +27,7 @@
                </MenuItem>
            </items>
          </Menu>
-         <Menu mnemonicParsing="false" text="File">
+         <Menu mnemonicParsing="false" text="Edit">
             <items>
                <MenuItem fx:id="menuItemNew1" mnemonicParsing="false" text="New">
                   <accelerator>
@@ -48,7 +48,7 @@
          </Menu>
       </menus></MenuBar>
 
-    <ToolBar fx:id="toolbar" disable="true" styleClass="toolbar">
+    <ToolBar fx:id="toolbar" styleClass="toolbar">
         <Button fx:id="btnCompile" minWidth="100" text="Compile" />
         <Button fx:id="btnRun" disable="true" minWidth="100" text="Run" />
         <Button fx:id="btnCompileAndRun" minWidth="100" text="Compile and Run" />
