@@ -1,10 +1,54 @@
+.root
+{
+    background-color: #222;
+    -fx-background-color: background-color;
+}
+
+.menu .label
+{
+    -fx-text-fill: #eee;
+}
+
+.menu-item .label
+{
+    -fx-text-fill: black;
+}
+
+.toolbar
+{
+    -fx-background-color: background-color;
+}
+
+.split-pane
+{
+    -fx-background-color: background-color;
+}
+
+.split-pane-divider
+{
+    -fx-background-color: #444;
+}
+
+.editor
+{
+    -fx-background-color: background-color;
+}
+
 .text-area
 {
-    text-area-background-color: #222;
     -fx-text-fill: #eee;
+    -fx-border-color: background-color;
+    -fx-border-radius: 0;
 }
 
 .text-area .content
 {
-    -fx-background-color: text-area-background-color;
+    -fx-background-color: background-color;
+    -fx-border-color: background-color;
+    -fx-border-radius: 0;
+}
+
+.text-area .scroll-pane
+{
+    -fx-background-color: background-color;
 }

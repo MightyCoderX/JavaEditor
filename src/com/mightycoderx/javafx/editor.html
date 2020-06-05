@@ -2,6 +2,12 @@
 <html lang="en">
     <head>
         <style media="screen">
+            body, html
+            {
+                margin: 0;
+                padding: 0;
+            }
+
             #editor {
                 position: absolute;
                 top: 0;
@@ -72,7 +78,7 @@
                     exec: editor => {},
                     readOnly: true
                 });
-                
+
                 editor.setValue("");
             }
 

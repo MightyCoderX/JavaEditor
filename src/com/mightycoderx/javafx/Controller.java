@@ -1,7 +1,6 @@
 package com.mightycoderx.javafx;
 
 import com.sun.istack.internal.Nullable;
-import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,16 +12,15 @@ import javafx.scene.web.WebView;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.*;
 
 public class Controller implements Initializable
 {
     @FXML
     public ToolBar toolbar;
-    
-    @FXML
-    private WebView editor;
 
     @FXML
     public Button btnCompile;
@@ -32,7 +30,10 @@ public class Controller implements Initializable
 
     @FXML
     public Button btnCompileAndRun;
-
+    
+    @FXML
+    private WebView editor;
+    
     @FXML
     private TextArea txtConsole;
 
@@ -40,10 +41,10 @@ public class Controller implements Initializable
     public void initialize(URL location, ResourceBundle resources)
     {
         File file = new File("Main.java");
-
+    
         editor.getEngine().setJavaScriptEnabled(true);
         editor.getEngine().load(Controller.class.getResource("editor.html").toExternalForm().replace("file:/", "file:///"));
-
+    
         editor.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.SUCCEEDED)
             {
@@ -72,8 +73,8 @@ public class Controller implements Initializable
         btnCompile.setOnAction(e ->
         {
             txtConsole.clear();
-            compile(file);
             btnRun.setDisable(false);
+            compile(file);
         });
 
         btnRun.setOnAction(e ->
@@ -101,54 +102,79 @@ public class Controller implements Initializable
         ClipboardContent content = new ClipboardContent();
         content.putString(contentText);
         clipboard.setContent(content);
-    
-        System.out.println("Clipboard: " + clipboard.getString());
     }
 
     public boolean compile(File file)
     {
-        AtomicBoolean success = new AtomicBoolean(false);
-        new Thread(() ->
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        final String value = (String) editor.getEngine().executeScript("getValue()");
+        Callable<Boolean> callable = () ->
         {
             try
             {
                 file.createNewFile();
                 FileWriter writer = new FileWriter(file.getPath());
-                writer.write((String) editor.getEngine().executeScript("getValue()"));
-                writer.close();
-    
-                Process pr = Runtime.getRuntime().exec("javac " + file.getPath());
-                
-                Platform.runLater(() ->
+                try
                 {
-                    int exitCode = 0;
-                    try
-                    {
-                        exitCode = printProcessOutput(pr);
-                    }
-                    catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    if (exitCode == 0)
-                    {
-                        println("Compiled successfully!\n");
-                        success.set(true);
-                    }
-                });
+                    writer.write(value);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                writer.close();
+        
+                Process pr = Runtime.getRuntime().exec("javac " + file.getPath());
+        
+                int exitCode = 0;
+                try
+                {
+                    exitCode = printProcessOutput(pr);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                if (exitCode == 0)
+                {
+                    println("Compiled successfully!\n");
+                    return true;
+                }
             }
             catch (IOException ioException)
             {
                 ioException.printStackTrace();
             }
-        }).run();
-        
-        return success.get();
+            return false;
+        };
+        Future<Boolean> future = executor.submit(callable);
+        executor.shutdown();
+        try
+        {
+            return future.get();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     public void run(File file)
     {
-        new Thread(() ->
+        Path path = Paths.get(file.getAbsolutePath());
+        ProcessBuilder pb = new ProcessBuilder("cmd", "/k", "start", "cmd", "/c", "\"echo off & cd " +
+                path.getParent().toString() + " & java " + path.getFileName().toString().replace(".java", "") + " & pause\"");
+        try
+        {
+            Process p = pb.start();
+        }
+        catch (IOException ioException)
+        {
+            ioException.printStackTrace();
+        }
+        
+        /*new Thread(() ->
         {
             try
             {
@@ -169,7 +195,7 @@ public class Controller implements Initializable
             {
                 ex.printStackTrace();
             }
-        }).run();
+        }).run();*/
     }
 
     public int printProcessOutput(Process pr) throws InterruptedException
