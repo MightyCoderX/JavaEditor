@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.input.KeyCodeCombination?>
-<VBox xmlns="http://javafx.com/javafx"
+
+<VBox fx:id="layout" xmlns="http://javafx.com/javafx" alignment="TOP_CENTER"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.mightycoderx.javaeditor.controllers.RootScene">
     <MenuBar prefHeight="12.0" prefWidth="802.0" style="-fx-padding: 0,0,0,0; -fx-background-color: #333;">
@@ -33,24 +30,23 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Edit">
                 <items>
-                    <MenuItem fx:id="menuItemNew1" mnemonicParsing="false" text="New">
+                    <MenuItem fx:id="menuItemCopy" mnemonicParsing="false" text="Copy">
                         <accelerator>
-                            <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
-                    <MenuItem fx:id="menuItemOpen1" mnemonicParsing="false" text="Open">
+                    <MenuItem fx:id="menuItemCut" mnemonicParsing="false" text="Cut">
                         <accelerator>
-                            <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
-                    <MenuItem fx:id="menuItemSave1" mnemonicParsing="false" text="Save">
+                    <MenuItem fx:id="menuItemPaste" mnemonicParsing="false" text="Paste">
                         <accelerator>
-                            <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
                 </items>
             </Menu>
         </menus>
     </MenuBar>
-
 </VBox>

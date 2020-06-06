@@ -6,7 +6,7 @@
 <?import javafx.scene.web.*?>
 
 <VBox fx:id="layout" visible="false" alignment="TOP_CENTER" spacing="0"
-      stylesheets="@../../../Scene.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
+      stylesheets="@../../../stylesheets/Scene.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mightycoderx.javaeditor.controllers.EditScreen">
 
     <ToolBar fx:id="toolbar" styleClass="toolbar">

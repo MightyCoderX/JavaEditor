@@ -25,13 +25,13 @@ public class EditScreen implements Initializable
     
     @FXML
     public ToolBar toolbar;
-
+    
     @FXML
     public Button btnCompile;
     
     @FXML
     private Button btnRun;
-
+    
     @FXML
     public Button btnCompileAndRun;
     
@@ -47,7 +47,7 @@ public class EditScreen implements Initializable
         File file = new File("Main.java");
     
         editor.getEngine().setJavaScriptEnabled(true);
-        editor.getEngine().load(EditScreen.class.getResource("editor.html").toExternalForm().replace("file:/", "file:///"));
+        editor.getEngine().load(EditScreen.class.getResource("../editor.html").toExternalForm().replace("file:/", "file:///"));
     
         editor.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.SUCCEEDED)
