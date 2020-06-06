@@ -4,16 +4,45 @@
     -fx-background-color: background-color;
 }
 
+.hbox
+{
+    -fx-background-color: #e4f;
+}
+
+.label
+{
+    -fx-text-fill: #eee;
+}
+
+.hyperlink
+{
+    -fx-border-color: transparent;
+    -fx-padding: 0,0,0,0;
+}
+
+.hyperlink:visited
+{
+    -fx-text-fill: #055
+}
+
 .menu .label
 {
     -fx-text-fill: #eee;
 }
 
-.menu-item .label
+.menu-item
 {
-    -fx-text-fill: black;
+    -fx-background-color: background-color;
+    -fx-border-width: 0;
 }
 
+.context-menu
+{
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: background-color;
+    -fx-background-insets: 0, 0, 0;
+    -fx-padding: 0 0 0 0;
+}
 .toolbar
 {
     -fx-background-color: background-color;

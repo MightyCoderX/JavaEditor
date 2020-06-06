@@ -72,12 +72,43 @@
                     printMargin: false
                 });
 
+
+
+                editor.commands.addCommand({
+                    name: 'undo',
+                    bindKey: {win: 'Ctrl-Z', mac: 'Command-Option-Z'},
+                    exec: editor => {},
+                    readOnly: true
+                });
+
+                editor.commands.addCommand({
+                    name: 'redo',
+                    bindKey: {win: 'Ctrl-Shift-Z', mac: 'Command-Option-Shift-Z'},
+                    exec: editor => {},
+                    readOnly: true
+                });
+
                 editor.commands.addCommand({
                     name: 'copy',
                     bindKey: {win: 'Ctrl-C', mac: 'Command-Option-C'},
                     exec: editor => {},
                     readOnly: true
                 });
+
+                editor.commands.addCommand({
+                    name: 'cut',
+                    bindKey: {win: 'Ctrl-X', mac: 'Command-Option-X'},
+                    exec: editor => {},
+                    readOnly: true
+                });
+
+                editor.commands.addCommand({
+                    name: 'paste',
+                    bindKey: {win: 'Ctrl-V', mac: 'Command-Option-V'},
+                    exec: editor => {},
+                    readOnly: true
+                });
+
 
                 editor.setValue("");
             }
@@ -90,6 +121,18 @@
             function copySelection()
             {
                 return editor.getCopyText();
+            }
+
+            function cutSelection()
+            {
+                let value = "";
+                if(editor.getSelectedText())
+                {
+                    value = copySelection();
+                    editor.insert("");
+                }
+
+                return value;
             }
 
             function pasteValue(value)

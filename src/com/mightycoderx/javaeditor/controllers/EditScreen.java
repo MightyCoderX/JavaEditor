@@ -10,6 +10,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
+import netscape.javascript.JSObject;
 
 import java.io.*;
 import java.net.URL;
@@ -20,6 +21,8 @@ import java.util.concurrent.*;
 
 public class EditScreen implements Initializable
 {
+    public static EditScreen instance = new EditScreen();
+    
     @FXML
     public VBox layout;
     
@@ -44,6 +47,15 @@ public class EditScreen implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        RootScene.instance.menuItemNew.setDisable(false);
+        RootScene.instance.menuItemOpen.setDisable(false);
+        RootScene.instance.menuItemSave.setDisable(false);
+        RootScene.instance.menuItemUndo.setDisable(false);
+        RootScene.instance.menuItemRedo.setDisable(false);
+        RootScene.instance.menuItemCopy.setDisable(false);
+        RootScene.instance.menuItemCut.setDisable(false);
+        RootScene.instance.menuItemPaste.setDisable(false);
+        
         File file = new File("Main.java");
     
         editor.getEngine().setJavaScriptEnabled(true);
@@ -57,22 +69,23 @@ public class EditScreen implements Initializable
             }
         });
 
+        /*
         final KeyCombination copyCombo = new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN);
         final KeyCombination cutCombo = new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN);
-    
     
         editor.addEventFilter(KeyEvent.KEY_PRESSED, e ->
         {
             if (copyCombo.match(e))
             {
-                onCopy();
+                copy();
             }
     
             if (cutCombo.match(e))
             {
-                onCopy();
+                cut();
             }
         });
+        */
 
         btnCompile.setOnAction(e ->
         {
@@ -97,8 +110,16 @@ public class EditScreen implements Initializable
             }
         });
     }
-
-    private void onCopy()
+    
+    public void undo()
+    {
+    }
+    
+    public void redo()
+    {
+    }
+    
+    public void copy()
     {
         String contentText = (String) editor.getEngine().executeScript("copySelection()");
 
@@ -106,6 +127,22 @@ public class EditScreen implements Initializable
         ClipboardContent content = new ClipboardContent();
         content.putString(contentText);
         clipboard.setContent(content);
+    }
+    
+    public void cut()
+    {
+    
+    }
+    
+    public void paste()
+    {
+        Clipboard theClipboard = Clipboard.getSystemClipboard();
+        String theContent = (String) theClipboard.getContent(DataFormat.PLAIN_TEXT);
+        if (theContent != null)
+        {
+            JSObject window = (JSObject) editor.getEngine().executeScript("window");
+            window.call("pastevalue", theContent);
+        }
     }
 
     public boolean compile(File file)

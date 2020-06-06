@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.input.KeyCodeCombination?>
 
-<VBox fx:id="layout" xmlns="http://javafx.com/javafx" alignment="TOP_CENTER"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mightycoderx.javaeditor.controllers.RootScene">
+<VBox fx:id="layout" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mightycoderx.javaeditor.controllers.RootScene">
     <MenuBar prefHeight="12.0" prefWidth="802.0" style="-fx-padding: 0,0,0,0; -fx-background-color: #333;">
         <menus>
             <Menu mnemonicParsing="false" text="File">
@@ -30,17 +28,28 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Edit">
                 <items>
-                    <MenuItem fx:id="menuItemCopy" mnemonicParsing="false" text="Copy">
+                    <MenuItem fx:id="menuItemUndo" disable="true" mnemonicParsing="false" text="Undo">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem fx:id="menuItemRedo" disable="true" mnemonicParsing="false" text="Redo">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                        </accelerator>
+                    </MenuItem>
+               <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem fx:id="menuItemCopy" disable="true" mnemonicParsing="false" text="Copy">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
-                    <MenuItem fx:id="menuItemCut" mnemonicParsing="false" text="Cut">
+                    <MenuItem fx:id="menuItemCut" disable="true" mnemonicParsing="false" text="Cut">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
-                    <MenuItem fx:id="menuItemPaste" mnemonicParsing="false" text="Paste">
+                    <MenuItem fx:id="menuItemPaste" disable="true" mnemonicParsing="false" text="Paste">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
