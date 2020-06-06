@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<VBox fx:id="layout" visible="false" alignment="TOP_CENTER" spacing="0"
+      stylesheets="@../../../Scene.css" xmlns="http://javafx.com/javafx/10.0.2-internal"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mightycoderx.javaeditor.controllers.EditScreen">
+
+    <ToolBar fx:id="toolbar" styleClass="toolbar">
+        <Button fx:id="btnCompile" minWidth="100" text="Compile" />
+        <Button fx:id="btnRun" disable="true" minWidth="100" text="Run" />
+        <Button fx:id="btnCompileAndRun" minWidth="100" text="Compile and Run" />
+    </ToolBar>
+
+    <SplitPane dividerPositions="0.8" orientation="VERTICAL" style="-fx-border-width: 0;">
+        <WebView fx:id="editor" />
+        <TextArea fx:id="txtConsole" editable="false" minHeight="0" />
+    </SplitPane>
+
+</VBox>

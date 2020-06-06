@@ -1,4 +1,4 @@
-package com.mightycoderx.javafx;
+package com.mightycoderx.javaeditor.controllers;
 
 import com.sun.istack.internal.Nullable;
 import javafx.concurrent.Worker;
@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.concurrent.*;
 
-public class Controller implements Initializable
+public class EditScreen implements Initializable
 {
     @FXML
     public VBox layout;
@@ -47,7 +47,7 @@ public class Controller implements Initializable
         File file = new File("Main.java");
     
         editor.getEngine().setJavaScriptEnabled(true);
-        editor.getEngine().load(Controller.class.getResource("editor.html").toExternalForm().replace("file:/", "file:///"));
+        editor.getEngine().load(EditScreen.class.getResource("editor.html").toExternalForm().replace("file:/", "file:///"));
     
         editor.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.SUCCEEDED)
