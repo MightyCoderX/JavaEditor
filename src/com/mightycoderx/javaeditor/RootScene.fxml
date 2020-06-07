@@ -9,7 +9,7 @@
         <menus>
             <Menu mnemonicParsing="false" text="File">
                 <items>
-                    <MenuItem fx:id="menuItemNew" mnemonicParsing="false" text="New">
+                    <MenuItem fx:id="menuItemNew" mnemonicParsing="false" text="New Project">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
@@ -38,7 +38,7 @@
                             <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
-               <SeparatorMenuItem mnemonicParsing="false" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
                     <MenuItem fx:id="menuItemCopy" disable="true" mnemonicParsing="false" text="Copy">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />

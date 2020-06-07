@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mightycoderx.javaeditor.controllers.StartScreen">
-    <Label style="-fx-font-size: 35px">Welcome to Java Editor</Label>
-    <Hyperlink>Github</Hyperlink>
+      fx:controller="com.mightycoderx.javaeditor.controllers.StartScreen" style="-fx-text-fill: #eee">
+    <Label style="-fx-font-size: 32px">Welcome to Java Editor</Label>
+    <Hyperlink fx:id="githubLink" style="-fx-font-size: 14px">Github Repository</Hyperlink>
+    <Label style="-fx-font-size: 14px">An open source java editor which can compile and run java apps using the java exeutable you have in your PATH</Label>
 </VBox>

@@ -1,11 +1,14 @@
 package com.mightycoderx.javaeditor.controllers;
 
 import com.mightycoderx.javaeditor.JavaEditorMain;
+import com.mightycoderx.javaeditor.dialogs.NewProjectDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,7 +63,9 @@ public class RootScene implements Initializable
         //File Menu
         menuItemNew.setOnAction(e ->
         {
-        
+            NewProjectDialog newProjectDialog = new NewProjectDialog();
+            
+            
         });
     
         menuItemOpen.setOnAction(e ->
