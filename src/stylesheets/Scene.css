@@ -22,7 +22,12 @@
 
 .hyperlink:visited
 {
-    -fx-text-fill: #055
+    -fx-text-fill: #00aadd;
+}
+
+.menu:focused, .menu:hover
+{
+    -fx-background-color: #00aadd;
 }
 
 .menu .label
@@ -34,6 +39,11 @@
 {
     -fx-background-color: background-color;
     -fx-border-width: 0;
+}
+
+.menu-item:focused, .menu-item:hover
+{
+    -fx-background-color: #00aadd;
 }
 
 .context-menu

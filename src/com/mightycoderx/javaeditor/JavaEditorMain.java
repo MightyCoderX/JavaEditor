@@ -22,7 +22,7 @@ public class JavaEditorMain extends Application
         Parent rootSceneLayout = FXMLLoader.load(getClass().getResource("RootScene.fxml"));
         window.setTitle("Java Editor");
         
-        Scene rootScene = new Scene(rootSceneLayout, 500, 350);
+        Scene rootScene = new Scene(rootSceneLayout, 720, 480);
         
         window.setScene(rootScene);
         window.getScene().getStylesheets().add("stylesheets/Scene.css");
